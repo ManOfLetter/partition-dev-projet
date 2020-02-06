@@ -1,0 +1,10 @@
+Rencontre avec Donnatelo.
+
+Après lui avoir montré l'isolation des lignes (en binaire), il nous a recommandé l'utilisation d'un histogramme afin de détecter les positions des lignes (à l'aide des pics indiquant une présence de blanc) et des gammes (à l'aide de groupes de pics sur l'histogramme)
+
+Lorsque l'on aura les positions des lignes, il sera alors facile de détecter les hauteurs des notes (Do, Ré, Mi etc)
+Il nous suffit maintenant de détecter les cercles sur les gammes.
+
+Concernant la détection de clé de Sol ou de Fa, il nous a recommandé l'utilisation de fonction Swift (points caractéristiques d'une forme afin de ne pas être contraint par la taille, la rotation, la couleur etc) -> Plus puissant que l'utilisation de templates.
+
+
