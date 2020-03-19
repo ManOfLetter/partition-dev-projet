@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 
-image = cv2.imread('noire.png')
+image = cv2.imread('formes.bmp')
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 ret,thresh = cv2.threshold(gray,250,255,cv2.THRESH_BINARY_INV)
