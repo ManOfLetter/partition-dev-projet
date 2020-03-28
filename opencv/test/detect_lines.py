@@ -17,7 +17,7 @@ def show_wait_destroy(winname, img):
 def main(argv):
 
     # Load the image
-    src = cv.imread("partition.jpeg", cv.IMREAD_COLOR)
+    src = cv.imread("notes.png", cv.IMREAD_COLOR)
 
     # Show source image
     cv.imshow("src", src)
@@ -65,12 +65,7 @@ def main(argv):
     show_wait_destroy("horizontal", horizontal)
     # [horiz]
 
-    return 0
-
-if __name__ == "__main__":
-    main(sys.argv[1:])
-        
-"""
+       
     # [vert]
     # Specify size on vertical axis
     rows = vertical.shape[0]
@@ -102,8 +97,7 @@ if __name__ == "__main__":
     '''
 
     # Step 1
-    edges = cv.adaptiveThreshold(vertical, 255, cv.ADAPTIVE_THRESH_MEAN_C, \
-                                cv.THRESH_BINARY, 3, -2)
+    edges = cv.adaptiveThreshold(vertical, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 3, -2)
     show_wait_destroy("edges", edges)
 
     # Step 2
@@ -123,8 +117,52 @@ if __name__ == "__main__":
 
     # Show final result
     show_wait_destroy("smooth - final", vertical)
+    cv.imwrite("vertical.png",vertical)
     # [smooth]
-"""
+
+    image = cv.imread('vertical.png')
+
+    gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
+    ret,thresh = cv.threshold(gray,250,255,cv.THRESH_BINARY_INV)
+
+    img,contours,h =cv.findContours(thresh,cv.RETR_EXTERNAL,cv.CHAIN_APPROX_SIMPLE)
+
+    decal = 0
+    for cnt in contours:
+        perimetre=cv.arcLength(cnt,True)
+        approx = cv.approxPolyDP(cnt,0.01*perimetre,True)
+        decal = decal + 10 
+        M = cv.moments(cnt)
+        cX = int(M["m10"] / M["m00"])
+        cY = int(M["m01"] / M["m00"])
+        cv.drawContours(image,[cnt],-1,(0,255,0),2)
+        
+        if len(approx)==3:
+            shape = "triangle"
+        elif len(approx)==4:
+            (x, y, w, h) = cv.boundingRect(approx)
+            ratio = w / float(h)
+            if ratio >= 0.95 and ratio <= 1.05:
+                shape = "carre"
+            else:
+                shape = "rectangle"
+        elif len(approx)==5:
+            shape = "pentagone"
+        elif len(approx)==6:
+            shape = "hexagone"
+        else:
+            shape= "notes"
+        #cv.putText(image, shape, (cX, 120+decal), cv.FONT_HERSHEY_SIMPLEX,0.5, (0, 255, 0), 1)
+        cv.putText(image, shape, (cX, cY), cv.FONT_HERSHEY_SIMPLEX,0.5, (0, 0, 255), 1)
+
+
+    cv.imwrite('test_noire.jpg', image)
+    cv.imshow('image',image)
+    cv.waitKey(0)
     
+    return 0 
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
 
 
