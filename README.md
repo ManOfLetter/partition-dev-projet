@@ -1,2 +1,2 @@
 # partition-dev-projet
-Projet Devevloppement Polytech 3A - Analyse d'Image pour Parition Musicale
+Projet Développement DII3A - 2019-2020 - Analyse d'Image pour Partition Musicale
