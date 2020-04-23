@@ -1,0 +1,6 @@
+opencv_createsamples -img sol.png -bg negatives.txt -info positives/positives.lst -pngoutput -num 1100
+
+opencv_createsamples -info positives/positives.lst  -num 1000 -w 24 -h 24 -vec positives.vec
+
+opencv_traincascade -data data -vec positives.vec -bg negatives.txt -numPos 550 -numNeg 600 -numStages 20 -w 24 -h 24
+
