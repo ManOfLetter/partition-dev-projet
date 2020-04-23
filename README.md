@@ -1,2 +1,2 @@
 # partition-dev-projet
-Projet Dev Polytech 3A - Analyse de partitions pour sortie en MIDI
+Projet Devevloppement Polytech 3A - Analyse d'Image pour Parition Musicale
