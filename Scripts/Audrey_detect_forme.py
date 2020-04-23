@@ -18,7 +18,7 @@ je masque mon image de base
 
 J'affiche ensuite le resultat
 """
-image = cv2.imread('piecetest.jpg')
+image = cv2.imread('Images/formes.bmp')
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 flougaussien = cv2.GaussianBlur(gray, (3,3), 0)
 #flougaussien = cv2.bilateralFilter(gray, 5, 40, 40)
